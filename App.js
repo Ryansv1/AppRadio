@@ -2,15 +2,26 @@ import React from 'react';
 import { View, StyleSheet, Dimensions, Image } from 'react-native';
 import { Button, Text } from '@rneui/themed'
 import { LinearGradient } from 'expo-linear-gradient';
+import TrackPlayer from 'react-native-track-player';
 
+
+ 
 
 const { width, height } = Dimensions.get('window')
 const handlePress = () => {
- fetch('www.google.com')
-  .then( )
-}
+  TrackPlayer.setupPlayer().then(async () =>{
+    await TrackPlayer.add({
+      id: '1',
+      url: 'stm43.conectastm.com:7790',
+      title: 'Rádio 102.9 Amorim FM',
+      artist: 'A mais ouvida e potente da região!',
+    });
+  });
+  TrackPlayer.play();
+} 
 
 export default function App(){
+
   return(
     <LinearGradient style={styles.appBackground}colors={['#ffffff','#087FED','#0E1D51']}>
       <View style={styles.containerLogos}>
@@ -44,7 +55,7 @@ export default function App(){
           CLIQUE E EMBARQUE NA PROGRAMAÇÃO DA 102.9 AMORIM FM!
         </Text>
       </LinearGradient>
-      <Button title="SINTONIZE!" onPress={handlePress} titleStyle={{fontStyle: 'italic',fontWeight: 'bold', color: 'black'}} buttonStyle={styles.botaoSintonize}></Button>
+      <Button title="SINTONIZE!" onPress={handlePress}titleStyle={{fontStyle: 'italic',fontWeight: 'bold', color: 'black'}} buttonStyle={styles.botaoSintonize}></Button>
     </LinearGradient>
   )
 }
